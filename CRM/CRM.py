@@ -11,17 +11,18 @@ from person import Person
 #create firm
 wfa = Firm('Wells Fargo Advisors')
 desks = {}
-people = {}
+people = {'unknown' : None} #{names : people objects}
 initiatives = {}
 
 #add people to firm
-people_data = pd.read_csv('people.csv')
+people_data = pd.read_csv('people_with_bosses.csv')
 for person_data in people_data.values:
   name = person_data[0]
   role = person_data[1]
   desk = person_data[2]
   notes = person_data[3]
   initiative = person_data[4]
+  boss = person_data[5]
   
   #add innititive to firm
   if initiative not in initiatives:
@@ -32,7 +33,7 @@ for person_data in people_data.values:
     desks[desk] = Desk(desk, wfa)
   
   if name not in people:
-    people[name] = Person(name, role, desks[desk], notes, initiatives[initiative])
+    people[name] = Person(name, role, desks[desk], notes, initiatives[initiative], boss)
 
   #add person to firm
   wfa.addPpl(people[name])
@@ -40,14 +41,23 @@ for person_data in people_data.values:
   #add people to desks
   desks[desk].addPpl(people[name])
   
-#ADD note to muni desk
+#second iteration to add all bosses to people objects:
+for person in people.values():
+    if person:
+        person.boss = people[person.boss]
+    
+  
+#ADD notes to desks
 desks['Muni'].addNote("All users on this desk share the same TW view")
 desks['Corporate'].addNote("Heavy users of SSOX and TW")
 desks['Strategy'].addNote("Primary decision makers for all technology decisions")
+desks['Tech'].addNote("Buncha nerds")
 
 
 
 #UI STUFF___________________________________________________________________
+
+#DESKS______________________________________________________________
 def getMuniDesk():
     return deskClick('Muni')
 def getCorpDesk():
@@ -75,6 +85,9 @@ def getFunction(desk):
     if desk == 'Rates':
         return getRatesDesk
 
+#DESKS END________________________________________________________________
+
+#People Start____________________________________________________________
 def getBrianMartin():
     return personClick("Brian Martin")
 def getBrianBishop():
@@ -87,6 +100,13 @@ def getJohnReilly():
     return personClick("John Reilly")
 def getKevinDevlin():
     return personClick("Kevin Devlin")
+def getDanKiley():
+    return personClick("Dan Kiley")
+def getCraigNoble():
+    return personClick("Craig Noble")   
+def getJimStebner():
+    return personClick("Jim Stebner")
+
 
 def getPersonFunction(person):
     if person == "Brian Martin":
@@ -101,7 +121,16 @@ def getPersonFunction(person):
         return getJohnReilly
     if person == "Kevin Devlin":
         return getKevinDevlin
-    
+    if person == "Dan Kiley":
+        return getDanKiley
+    if person == "Craig Noble":
+        return getCraigNoble
+    if person == "Jim Stebner":
+        return getJimStebner
+        
+#People End_____________________________________________________________
+
+#Person Button___________________________________________________________
 def personClick(name):
     person = people[name]
     personWindow = Tk()
@@ -110,10 +139,22 @@ def personClick(name):
     personLabel = Label(personWindow, text = text)
     personLabel.pack(fill = X)
     
+    notes = Label(personWindow, text = "Notes", bg = "blue", fg = "white")
+    notes.pack(fill = X)
+
     notesLabel = Label(personWindow, text = person.notes)
     notesLabel.pack()
     
+    bossLabel = Label(personWindow, text = "Reports up to", bg = "red")
+    bossLabel.pack(fill = X)
+    
+    if person.boss:
+        function = getPersonFunction(person.boss.name)
+        button = Button(personWindow, text = person.boss.name, command = function)
+        button.pack()
+    
     personWindow.mainloop()
+#Person Button End_____________________________________________________________
     
 def deskClick(desk):
     #create a new window focusing on the desk entity
@@ -158,7 +199,7 @@ topLabel.pack(fill = X)
 for desk in desks.keys():
     function = getFunction(desk)
     button = Button(window, text = desk, fg = "blue", command = function)
-    button.pack(side = LEFT)
+    button.pack(fill = X)
     
 #for person in people.keys():
     #button = Button(bottomFrame, text = person)

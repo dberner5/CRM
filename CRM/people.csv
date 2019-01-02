@@ -1,7 +1,17 @@
-name,role,desk,notes,initiative
-Brian Martin,Trader,Muni,Power user of TW,SSOX
-Brian Bishop,Trader,Corporate,Only prices GE and GS,SSOX
-John Reilly,Head of Taxable trading,Strategy,Rarely smiles,ADF
-Ben Manga,FI Strategy,Strategy,Involved in everything,ADF
-Rob Aston,Tech Admin,Tech,Primay TOMS admin,ADF
-Kevin Devlin,Trader,Muni,Nice guy,SSOX
+name,role,desk,notes,initiative,Boss
+Brian Bishop,Trader,Corporate,Only prices GE and GS,SSOX,Jim Stebner
+Liz Traster,Trader,Corporate,"Friendly, works with Chrisy",SSOX,Jim Stebner
+Grant Shepherd,Trader,Corporate,Covers convertibles,SSOX,Jim Stebner
+Jim Stebner,Head of Corp Trading,Corporate,Head of Desk,SSOX,John Reilly
+Brian Martin,Trader,Muni,Power user of TW,SSOX,Dan Kiley
+Kevin Devlin,Trader,Muni,Nice guy,SSOX,Brian Martin
+Bud Winter,Trader,Muni,Likes Ice Cream,SSOX,Brian Martin
+Jenny Miller,Trader,Muni,Has been experiencing slowness issues,SSOX,Brian Martin
+David Receski,Trader,Muni,Like talking about everything but work,SSOX,Brian Martin
+John Reilly,Head of Taxable trading,Strategy,Rarely smiles,ADF,Craig Noble
+Ben Manga,FI Strategy,Strategy,Involved in everything,ADF,John Reilly
+Rob Aston,Tech Admin,Tech,Primay TOMS admin,ADF,unknown
+Donna Arey,Tech Admin,Tech,Doesn’t know as much as Rob,ADF,unknown
+Zack Feltenstein,Risk Officer,Risk,Handles P&L Attribution ,RISK,George St Clair
+George St Clair,Head of Risk,Risk,Super smart guy,Risk,Craig Noble
+Craig Noble,Head of WFA Trading,Strategy,The boss man,RISK,unknown
